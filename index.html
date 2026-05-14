@@ -103,21 +103,6 @@
 
       <!-- Main Content Area -->
       <main id="content-roadmap">
-        <section class="mb-12">
-          <h2 class="text-2xl font-bold mb-4">
-            Análisis de Esfuerzo por Componente
-          </h2>
-          <p class="text-stone-600 mb-6 italic">
-            Distribución técnica basada en la complejidad de los algoritmos y la
-            integración con el sistema nativo.
-          </p>
-          <div
-            class="chart-container bg-white p-6 rounded-2xl border border-stone-100 shadow-sm"
-          >
-            <canvas id="effortChart"></canvas>
-          </div>
-        </section>
-
         <div class="space-y-16">
           <!-- Módulo 1 -->
           <div class="step-group">
@@ -414,54 +399,6 @@
     </div>
 
     <script>
-      // Data for Chart
-      const ctx = document.getElementById("effortChart").getContext("2d");
-      const effortChart = new Chart(ctx, {
-        type: "bar",
-        data: {
-          labels: [
-            "Core (Tauri)",
-            "Motor (Canvas)",
-            "Lógica (Math)",
-            "Persistencia (FS)",
-          ],
-          datasets: [
-            {
-              label: "Complejidad Algorítmica",
-              data: [45, 85, 90, 40],
-              backgroundColor: "#d1d5db",
-              borderRadius: 4,
-            },
-            {
-              label: "Esfuerzo de Integración",
-              data: [80, 60, 40, 75],
-              backgroundColor: "#6b8e6b",
-              borderRadius: 4,
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: {
-            y: {
-              beginAtZero: true,
-              max: 100,
-              ticks: { font: { family: "JetBrains Mono" } },
-            },
-            x: {
-              ticks: { font: { weight: "bold" } },
-            },
-          },
-          plugins: {
-            legend: {
-              position: "bottom",
-              labels: { font: { family: "Plus Jakarta Sans" } },
-            },
-          },
-        },
-      });
-
       // Tab Switching Logic
       function switchTab(tabId) {
         const roadmap = document.getElementById("content-roadmap");
