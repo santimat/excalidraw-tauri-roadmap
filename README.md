@@ -27,4 +27,11 @@ Repositorio Original de Excalidraw: [GitHub - Excalidraw](https://github.com/exc
 Este proyecto tiene como intención:
 
 - Experimentar con un stack tecnológico novedoso.
-- Aprendizaje práctico sobre cómo configurar, construir y mantener proyectos frontend construidos con Astro.
+- Mejorar logica y skills de frontend.
+- Entender mejor el manejo de componentes y estado en React.
+- Aprender manejo de archivos y backend con Rust.
+- Entender renderizado 2D en canvas con redimensionamiento.
+- Aprender tauri para crear binarios C++.
+- Comprender manejo de eventos.
+- Aprender patrones de ordenamiento y comandos.
+- Implemntar snapshots.
