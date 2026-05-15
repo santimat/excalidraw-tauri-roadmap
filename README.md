@@ -16,7 +16,7 @@ Este proyecto es una aproximación inicial y experimentación con herramientas m
 
 ## Créditos
 
-Esta inspiración y proyecto está dedicado también a reconocer el increíble trabajo realizado por los creadores de [Excalidraw](https://github.com/excalidraw/excalidraw).
+Esta inspiración y proyecto está dedicado también a reconocer el increíble trabajo realizado por los creadores de [Excalidraw]([https://github.com/excalidraw/excalidraw](https://excalidraw.com/)).
 
 Repositorio Original de Excalidraw: [GitHub - Excalidraw](https://github.com/excalidraw/excalidraw)
 
