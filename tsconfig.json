@@ -3,10 +3,10 @@
   "exclude": ["dist"],
   "compilerOptions": {
     "paths": {
-      "@styles": ["./src/styles/*"],
-      "@components": ["./src/components/*"],
-      "@pages": ["./src/pages/*"],
-      "@": ["./src/*"]
+      "@styles/*": ["./src/styles/*"],
+      "@components/*": ["./src/components/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@/*": ["./src/*"]
     }
   }
 }
