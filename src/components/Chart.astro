@@ -1,0 +1,102 @@
+---
+
+---
+
+<section class="mb-12 max-w-5xl mx-auto">
+  <h2 class="text-2xl font-bold mb-4">Análisis de Esfuerzo por Componente</h2>
+  <p class="text-stone-600 mb-6 italic">
+    Distribución técnica basada en la complejidad de los algoritmos y la
+    integración con el sistema nativo.
+  </p>
+  <div class="bg-white p-6 rounded-2xl shadow-sm">
+    <canvas id="effortChart"></canvas>
+  </div>
+</section>
+
+<script>
+  import Chart, { ChartConfiguration } from "chart.js/auto";
+  const $canvas = document.getElementById("effortChart") as HTMLCanvasElement;
+  const context = $canvas.getContext("2d");
+
+  if (context) {
+    const effortChart = new Chart(context, {
+      type: "bar",
+      data: {
+        labels: [
+          "Fase 1 — Setup",
+          "Fase 2 — Viewport",
+          "Fase 3 — Rectángulo",
+          "Fase 4 — Selección",
+          "Fase 5 — Undo/Redo",
+          "Fase 6 — Herramientas",
+          "Fase 7 — Archivos",
+          "Fase 8 — Polish",
+        ],
+        datasets: [
+          {
+            label: "Frontend",
+            data: [2, 4, 3, 5, 3, 4, 2, 3],
+            backgroundColor: "#378ADD",
+            borderRadius: 4,
+            borderSkipped: false,
+          },
+          {
+            label: "Rust",
+            data: [2, 0, 0, 0, 0, 0, 4, 2],
+            backgroundColor: "#D85A30",
+            borderRadius: 4,
+            borderSkipped: false,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "bottom",
+          },
+          title: {
+            display: true,
+            text: "Complejidad por fase — Frontend vs Rust",
+          },
+          tooltip: {
+            callbacks: {
+              label: (context) => {
+                const labels = [
+                  "",
+                  "Muy baja",
+                  "Baja",
+                  "Media",
+                  "Alta",
+                  "Muy alta",
+                ];
+                return `${context.dataset.label}: ${labels[context.parsed.y ?? 0]}`;
+              },
+            },
+          },
+        },
+        scales: {
+          x: {
+            stacked: false,
+            grid: { display: false },
+          },
+          y: {
+            stacked: false,
+            beginAtZero: false,
+            min: 0,
+            max: 5,
+            ticks: {
+              stepSize: 1,
+              callback: (val) =>
+                ["", "Muy baja", "Baja", "Media", "Alta", "Muy alta"][+val],
+            },
+            title: {
+              display: true,
+              text: "Nivel de complejidad",
+            },
+          },
+        },
+      },
+    } as ChartConfiguration);
+  }
+</script>
