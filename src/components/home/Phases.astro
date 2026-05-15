@@ -1,0 +1,483 @@
+---
+import type { PhaseProps } from "@components/home/Phase.astro";
+import Phase from "@components/home/Phase.astro";
+const PHASES: PhaseProps[] = [
+  {
+    title: "Setup y Fundamentos",
+    steps: [
+      {
+        title: "Scaffolding del Proyecto",
+        description:
+          "Create-tauri-app con React + TypeScript. Entender la estructura src-tauri/ vs src/.",
+        sources: [
+          {
+            name: "Tauri Getting Started",
+            url: "https://tauri.app/start/",
+          },
+          {
+            name: "Create Tauri App",
+            url: "https://github.com/tauri-apps/create-tauri-app",
+          },
+        ],
+      },
+      {
+        title: "Primer comando Rust",
+        description:
+          "Crear greet() desde Tauri y llamarlo con invoke() desde React. Entender el bridge JS↔Rust.",
+        sources: [
+          {
+            name: "Tauri commands",
+            url: "https://tauri.app/develop/calling-rust/",
+          },
+          {
+            name: "Rust Book",
+            url: "https://doc.rust-lang.org/book/",
+          },
+        ],
+      },
+      {
+        title: "Layout base de la app",
+        description:
+          "Toolbar lateral + área de canvas. Sin lógica aún, solo estructura y estilos.",
+        sources: [
+          {
+            name: "React docs",
+            url: "https://react.dev/learn/",
+          },
+        ],
+      },
+      {
+        title: "Primer canvas renderizado",
+        description:
+          "Usar <canvas> nativo para dibujar un rectángulo simple. Entender el ciclo de renderizado básico.",
+        sources: [
+          {
+            name: "Canvas API",
+            url: "https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/",
+          },
+          {
+            name: "Resize Observer API",
+            url: "https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Motor de viewport (zoom y pan)",
+    steps: [
+      {
+        title: "Estado del viewport",
+        description:
+          "Un objeto { x, y, zoom } que representa la cámara. Es la base de todo el sistema de coordenadas.",
+        sources: [
+          {
+            name: "2d transformations",
+            url: "https://www.html5rocks.com/en/tutorials/canvas/transformations/",
+          },
+          {
+            name: "Set Transform",
+            url: "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setTransform",
+          },
+        ],
+      },
+      {
+        title: "Pan con mouse/trackpad",
+        description:
+          "Arrastrar el canvas con botón medio o espacio+click. Transformar coordenadas screen↔world.",
+        sources: [
+          {
+            name: "Pointer Events",
+            url: "https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events",
+          },
+        ],
+      },
+      {
+        title: "Zoom hacia el cursor",
+        description:
+          "Wheel event con zoom centrado en la posición del mouse. El detalle que se siente 'profesional'.",
+        sources: [
+          {
+            name: "Zoom towards cursor",
+            url: "https://roblouie.com/article/1040/html-canvas-zoom-towards-cursor/",
+          },
+          {
+            name: "Wheel Event",
+            url: "https://developer.mozilla.org/en-US/docs/Web/API/WheelEvent",
+          },
+        ],
+      },
+      {
+        title: "Helper screenToWorld()",
+        description:
+          "Función que convierte coordenadas del mouse a coordenadas del mundo. La usarás constantemente.",
+        sources: [
+          {
+            name: "Coordinate spaces in canvas",
+            url: "https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Transformations",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Primer elemento dibujable: Rectángulo",
+    steps: [
+      {
+        title: "Modelo de datos de elementos",
+        description:
+          "Tipo Element con id, type, x, y, width, height, style. JSON serializable desde el día 1.",
+        sources: [
+          {
+            name: "Excalidraw Element Type",
+            url: "https://github.com/excalidraw/excalidraw/blob/master/packages/excalidraw/element/types.ts",
+          },
+        ],
+      },
+      {
+        title: "Herramienta rectangle",
+        description:
+          "Click y drag para crear. Dibujar el rect en tiempo real mientras arrastrás.",
+        sources: [
+          {
+            name: "Mousedown, mousemove, mouseup",
+            url: "https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent",
+          },
+        ],
+      },
+      {
+        title: "Renderizado en canvas",
+        description:
+          "Loop de render que itera sobre el array de elementos y dibuja cada uno con la transformación del viewport.",
+        sources: [
+          {
+            name: "requestAnimationFrame",
+            url: "https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame",
+          },
+        ],
+      },
+      {
+        title: "Integrar Rough.js",
+        description:
+          "npm install roughjs. Cambiar el render para usar rc.rectangle() y obtener la estética de boceto.",
+        sources: [
+          {
+            name: "Rough.js",
+            url: "https://roughjs.com/",
+          },
+          {
+            name: "Rough.js GitHub",
+            url: "https://github.com/rough-stuff/rough",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Selección y manipulación de elementos",
+    steps: [
+      {
+        title: "Hit-testing",
+        description:
+          "Detectar qué elemento clickeaste. AABB para rectángulos. Más complejo para líneas y flechas.",
+        sources: [
+          {
+            name: "AABB collision detection",
+            url: "https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection",
+          },
+          {
+            name: "Point in polygon",
+            url: "https://wrfranklin.org/Research/Short_Notes/pnpoly.html",
+          },
+        ],
+      },
+      {
+        title: "Selección simple y múltiple",
+        description:
+          "Click para seleccionar, Shift+click para multi-select, drag en vacío para selection box.",
+        sources: [
+          {
+            name: "Excalidraw selection logic",
+            url: "https://github.com/excalidraw/excalidraw/blob/master/packages/excalidraw/scene/selection.ts",
+          },
+        ],
+      },
+      {
+        title: "Mover elementos",
+        description:
+          "Drag de elementos seleccionados. Actualizar coordenadas en tiempo real.",
+        sources: [
+          {
+            name: "Pointer capture",
+            url: "https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events#pointer_capture",
+          },
+        ],
+      },
+      {
+        title: "Handles de resize",
+        description:
+          "8 handles (esquinas + medios). Cada uno modifica x/y/width/height diferente.",
+        sources: [
+          {
+            name: "Resize handles",
+            url: "https://spots.run/blog/how-to-build-an-element-transformer",
+          },
+        ],
+      },
+      {
+        title: "Rotación",
+        description:
+          "Handle de rotación. Requiere entender transformaciones 2D y actualizar el hit-testing.",
+        sources: [
+          {
+            name: "2D Rotation",
+            url: "https://matthew-brett.github.io/teaching/rotation_2d.html",
+          },
+          {
+            name: "Math.atan2",
+            url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atan2",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Undo/Redo e historial",
+    steps: [
+      {
+        title: "Stack de historial",
+        description:
+          "Array de snapshots del estado. Ctrl+Z hace pop, Ctrl+Y hace push hacia adelante.",
+        sources: [
+          {
+            name: "Undo/Redo patterns",
+            url: "https://redux.js.org/usage/implementing-undo-history",
+          },
+          {
+            name: "Command pattern",
+            url: "https://refactoring.guru/design-patterns/command",
+          },
+        ],
+      },
+      {
+        title: "Snapshots inmutables",
+        description:
+          "Cada acción genera una copia del array. Saber cuándo hacer snapshot (al soltar el mouse, no durante el drag).",
+        sources: [
+          {
+            name: "Immer.js",
+            url: "https://immerjs.github.io/immer/",
+          },
+          {
+            name: "structuredClone",
+            url: "https://developer.mozilla.org/en-US/docs/Web/API/structuredClone",
+          },
+        ],
+      },
+      {
+        title: "Optimización con patches",
+        description:
+          "Opcional: en vez de clonar todo, guardar solo el diff. Útil con muchos elementos.",
+        sources: [
+          {
+            name: "Immer.js patches",
+            url: "https://immerjs.github.io/immer/patches",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Más herramientas de dibujo",
+    steps: [
+      {
+        title: "Ellipse y diamond",
+        description:
+          "Similar al rectángulo. Rough.js tiene rc.ellipse() y rc.polygon().",
+        sources: [
+          {
+            name: "Rough.js API",
+            url: "https://roughjs.com/bundled/rough.esm.js.html",
+          },
+        ],
+      },
+      {
+        title: "Flechas y líneas",
+        description:
+          "Puntos de inicio/fin, curvaturas, punta de flecha. El hit-testing cambia.",
+        sources: [
+          {
+            name: "Perfect Arrows",
+            url: "https://github.com/steveruizok/perfect-arrows",
+          },
+          {
+            name: "quadraticCurveTo",
+            url: "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/quadraticCurveTo",
+          },
+        ],
+      },
+      {
+        title: "Dibujo libre (freedraw)",
+        description:
+          "Array de puntos. Simplificar con Ramer–Douglas–Peucker para no guardar miles de puntos.",
+        sources: [
+          {
+            name: "Ramer–Douglas–Peucker algorithm",
+            url: "https://en.wikipedia.org/wiki/Ramer%E2%80%93Douglas%E2%80%93Peucker_algorithm",
+          },
+          {
+            name: "Perfect Freehand",
+            url: "https://github.com/steveruizok/perfect-freehand",
+          },
+        ],
+      },
+      {
+        title: "Texto editable",
+        description:
+          "Click para crear un elemento de texto. Doble click para editar. Usar contenteditable o un input flotante.",
+        sources: [],
+      },
+    ],
+  },
+  {
+    title: "Archivos y exportación (Rust)",
+    steps: [
+      {
+        title: "Guardar/abrir .excali (JSON) Rust FS",
+        description:
+          "Serializar elementos a JSON. Usar el dialog de Tauri para elegir ruta. Tu primer uso real de Rust.",
+        sources: [
+          {
+            name: "Tauri File System",
+            url: "https://tauri.app/plugin/file-system/",
+          },
+          {
+            name: "Tauri Dialog",
+            url: "https://tauri.app/plugin/dialog/",
+          },
+        ],
+      },
+      {
+        title: "Exportar a PNG (Rust)",
+        description:
+          "Renderizar el canvas a ImageData y pasarlo a Rust para guardarlo como archivo.",
+        sources: [
+          {
+            name: "Canvas to Blob",
+            url: "https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob",
+          },
+          {
+            name: "Image crate in Rust",
+            url: "https://docs.rs/image/latest/image/",
+          },
+        ],
+      },
+      {
+        title: "Exportar a SVG",
+        description:
+          "Generar SVG programáticamente desde los elementos. Más complejo pero muy útil.",
+        sources: [
+          {
+            name: "SVG basics",
+            url: "https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Basic_Shapes",
+          },
+          {
+            name: "svg crate in Rust",
+            url: "https://docs.rs/svg/latest/svg/",
+          },
+        ],
+      },
+      {
+        title: "Menú nativo + shortcuts",
+        description:
+          "Configurar el menú de la app en Tauri. Ctrl+S, Ctrl+O, Ctrl+N.",
+        sources: [
+          {
+            name: "Tauri Menu",
+            url: "https://tauri.app/plugin/menu/",
+          },
+          {
+            name: "Tauri Global Shortcut",
+            url: "https://tauri.app/plugin/global-shortcut/",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Polish y funciones avanzadas",
+    steps: [
+      {
+        title: "Grilla y snap",
+        description:
+          "Snap to grid, snap a otros elementos (alineación). Muy satisfactorio de implementar.",
+        sources: [
+          {
+            name: "Snap to grid",
+            url: "https://www.redblobgames.com/grids/line-drawing/",
+          },
+          {
+            name: "Excalidraw snapping logic",
+            url: "https://github.com/excalidraw/excalidraw/blob/master/packages/excalidraw/snapping.ts",
+          },
+        ],
+      },
+      {
+        title: "Copy/paste de elementos",
+        description: "Copiar elementos al portapapeles interno. Ctrl+C/V/D.",
+        sources: [
+          {
+            name: "Clipboard API",
+            url: "https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API",
+          },
+          {
+            name: "Tauri Clipboard Manager",
+            url: "https://tauri.app/plugin/clipboard-manager/",
+          },
+        ],
+      },
+      {
+        title: "Ordenamiento z-index",
+        description:
+          "Bring to front / Send to back. Manejar el orden del array de elementos.",
+        sources: [
+          {
+            name: "Array sort pattern",
+            url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort",
+          },
+        ],
+      },
+      {
+        title: "Panel de propiedades",
+        description:
+          "Sidebar que muestra color, grosor, opacidad del elemento seleccionado.",
+        sources: [
+          {
+            name: "React controlled components",
+            url: "https://react.dev/learn/sharing-state-between-components",
+          },
+        ],
+      },
+      {
+        title: "Autosave",
+        description:
+          "Watcher en Rust que guarda periódicamente. Introducción a los async commands de Tauri.",
+        sources: [
+          {
+            name: "Tauri async commands",
+            url: "https://tauri.app/develop/calling-rust/#async-commands",
+          },
+          {
+            name: "Tokio async runtime",
+            url: "https://tokio.rs/",
+          },
+        ],
+      },
+    ],
+  },
+] as const;
+---
+
+<div class="grid gap-16">
+  {PHASES.map((phase, i) => <Phase {...phase} phase={i + 1} />)}
+</div>

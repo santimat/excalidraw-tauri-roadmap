@@ -1,0 +1,18 @@
+---
+import type { Source } from "@components/home/Step.astro";
+
+const { url, name } = Astro.props as Source;
+---
+
+<li
+  class="bg-accent-sage px-2 py-1 rounded-lg hover:scale-105 transition-transform"
+>
+  <a
+    href={url}
+    target="_blank"
+    class="text-sage-700 hover:underline text-sm line-clamp-1"
+  >
+    {name}
+  </a>
+</li>
+))
