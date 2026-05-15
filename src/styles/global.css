@@ -1,9 +1,13 @@
 @import "tailwindcss";
 
+@theme {
+  --color-accent-sage: #6b8e6b;
+  --color-border-step: #e2e8f0;
+}
+
 :root {
-  --bg-primary: #f8f9fa;
-  --accent-sage: #6b8e6b;
   --text-main: #2d3436;
+  --bg-primary: #f8f9fa;
 }
 
 body {
@@ -29,7 +33,7 @@ body {
 }
 
 .step-card {
-  border-left: 2px solid #e2e8f0;
+  border-left: 2px solid;
   transition: all 0.3s ease;
 }
 
