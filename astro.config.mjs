@@ -1,7 +1,6 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import tailwind from "@tailwindcss/vite";
-import path from "path";
 
 // https://astro.build/config
 export default defineConfig({
@@ -9,8 +8,10 @@ export default defineConfig({
     plugins: [tailwind()],
     resolve: {
       alias: {
-        "@": path.resolve("./src"),
-        "@styles": path.resolve("./src/styles"),
+        "@": new URL("./src", import.meta.url).pathname,
+        "@styles": new URL("./src/styles", import.meta.url).pathname,
+        "@components": new URL("./src/components", import.meta.url).pathname,
+        "@pages": new URL("./src/pages", import.meta.url).pathname,
       },
     },
   },
